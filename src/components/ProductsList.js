@@ -52,7 +52,7 @@ const ProductsList = () => {
                     <h5 className="card-title">
                       {product.title.substring(0, 10)}...
                     </h5>
-                    <Link>
+                    <Link to={`/product/${product.id}`}>
                       <p className="card-text">
                         {product.description.substring(0, 30)}
                         ...

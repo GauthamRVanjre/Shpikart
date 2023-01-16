@@ -1,0 +1,25 @@
+.product-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 80px;
+}
+
+.product-description img {
+  margin-top: 40px;
+  height: 350px;
+}
+
+.product-description-para {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.product-features p {
+  margin-right: 40px;
+  padding: 10px;
+  background-color: #000;
+  border-radius: 5px;
+  color: #fff;
+}
