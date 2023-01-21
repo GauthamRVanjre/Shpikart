@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import loading_img from "../images/loading_img.jpg";
+import { useDispatch } from "react-redux";
+import { ADD } from "../redux/actions/action";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
+
+  // redux operations
+  const dispatch = useDispatch();
+
+  const send = (product) => {
+    // dispatch({ type: "ADD_TO_CART", payload: product });
+    dispatch(ADD(product));
+  };
 
   useEffect(() => {
     try {
@@ -62,7 +72,12 @@ const ProductsList = () => {
                       <span>$ {product.price}</span>
                       <span>{product.category}</span>
                     </div>
-                    <button className="btn btn-primary">Add to Cart</button>
+                    <button
+                      onClick={() => send(product)}
+                      className="btn btn-primary"
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               </div>

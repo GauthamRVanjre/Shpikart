@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const getData = useSelector((state) => state.cartReducer.cart);
+  console.log(getData);
   return (
     <>
       <nav className="navBar">
@@ -13,8 +16,13 @@ const Navbar = () => {
             <Link to="/">
               <li>Home</li>
             </Link>
-            <Link to="/Cart">
-              <li>Cart</li>
+            <Link to="/cart">
+              <li className="dropdown">
+                Add to Cart
+                <span class="badge text-bg-secondary mx-2 p-2">
+                  {getData.length}
+                </span>
+              </li>
             </Link>
           </ul>
         </div>

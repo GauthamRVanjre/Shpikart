@@ -10,7 +10,6 @@ const Detail = () => {
   const [error, setError] = useState(false);
 
   const url = `https://fakestoreapi.com/products/${product.id}`;
-  console.log(productDetail);
 
   useEffect(() => {
     try {
