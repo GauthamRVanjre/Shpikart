@@ -23,6 +23,50 @@
   cursor: pointer;
 }
 
+.hamburger-icon {
+  display: none;
+}
+
+.hamburger-icon button {
+  border: none;
+  background-color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    padding: 15px 25px;
+  }
+  .hamburger-icon {
+    background-color: inherit;
+    display: block;
+  }
+  .nav-links-container {
+    display: none;
+  }
+  .nav-links-parent {
+    display: block;
+    background-color: rgb(232, 220, 220);
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    flex-direction: column;
+    max-width: 250px;
+    width: 100%;
+    height: calc(100vh - 570px);
+    border-radius: 10px;
+  }
+  .nav-links {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-right: 120px;
+    font-size: 20px;
+  }
+  .nav-links li {
+    padding-top: 15px;
+  }
+}
+
 li:hover {
   opacity: 0.6;
 }

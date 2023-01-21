@@ -2,12 +2,26 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import loading_img from "../../images/loading_img.jpg";
 import "./Detail.css";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD, REMOVE } from "../../redux/actions/action";
 
 const Detail = () => {
   const product = useParams();
   const [productDetail, setProductDetails] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const addProduct = (product) => {
+    dispatch(ADD(product));
+  };
+
+  const removeProduct = (id) => {
+    dispatch(REMOVE(id));
+  };
+
+  const getData = useSelector((state) => state.cartReducer.cart);
 
   const url = `https://fakestoreapi.com/products/${product.id}`;
 
@@ -45,7 +59,22 @@ const Detail = () => {
           <p>$ {productDetail.price}</p>
           <p>{productDetail.category}</p>
         </div>
-        <button className="btn btn-primary">Add to Cart</button>
+
+        {getData.some((item) => item.id === productDetail.id) ? (
+          <button
+            className="btn btn-danger"
+            onClick={() => removeProduct(productDetail.id)}
+          >
+            Remove from Cart
+          </button>
+        ) : (
+          <button
+            className="btn btn-primary"
+            onClick={() => addProduct(productDetail)}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
     );
   }

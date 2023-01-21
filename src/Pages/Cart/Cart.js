@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { ADD } from "../../redux/actions/action";
-import { SUBTRACT } from "../../redux/actions/action";
-import { REMOVE } from "../../redux/actions/action";
+import { ADD, SUBTRACT, REMOVE } from "../../redux/actions/action";
 import { useDispatch } from "react-redux";
+import "./Cart.css";
 
 const Cart = () => {
   const [Price, setPrice] = useState(0);
-  console.log(Price);
   const getData = useSelector((state) => state.cartReducer.cart);
-  console.log(getData);
   const dispatch = useDispatch();
 
   const addItem = (item) => {
@@ -29,7 +26,8 @@ const Cart = () => {
     getData.map((item, key) => {
       total += item.price * item.quantity;
     });
-    setPrice(total);
+
+    setPrice(total.toFixed(2));
   };
 
   useEffect(() => {
@@ -38,34 +36,69 @@ const Cart = () => {
 
   return (
     <>
-      <h1>Helloo cart</h1>
-      {getData.map((item) => {
-        return (
-          <div>
-            <h1>{item.title}</h1>
-            <h1>{item.price}</h1>
-            <div style={{ padding: "20px" }}>
-              <span onClick={() => subtractItem(item)}>-</span>
-              <span style={{ padding: "20px" }}>{item.quantity}</span>
-              <span onClick={() => addItem(item)}>+</span>
-            </div>
-            <button
-              onClick={() => deleteItem(item.id)}
-              className="btn btn-danger"
-            >
-              Delete
-            </button>
-            <br />
-            <br />
-          </div>
-        );
-      })}
+      <h1
+        style={{ textAlign: "center", marginTop: "20px", marginBottom: "20px" }}
+      >
+        Cart Page
+      </h1>
+      <div className="table-container">
+        <table className="table table-striped table-hover">
+          <thead className="table-heading">
+            <tr>
+              <th scope="col">Product Image</th>
+              <th scope="col">Product details</th>
+              <th scope="col">Remove Product</th>
+            </tr>
+          </thead>
+          <tbody>
+            {getData.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <th scope="row">
+                    <img className="item-img" src={item.image} alt="item-img" />
+                  </th>
 
-      <p>Total: ${Price}</p>
+                  <td>
+                    <div>
+                      <p> Name : {item.title}</p>
+                      <p>Price : {item.price}</p>
+                      <div>
+                        <span
+                          className="quantity-changer"
+                          onClick={() => subtractItem(item)}
+                        >
+                          -
+                        </span>
+                        <span style={{ padding: "20px" }}>{item.quantity}</span>
+                        <span
+                          className="quantity-changer"
+                          onClick={() => addItem(item)}
+                        >
+                          +
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => deleteItem(item.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <h1 style={{ textAlign: "center" }} className="Total-price">
+        Total: ${Price}
+      </h1>
     </>
   );
 };
-
-// const compare = () => {let data = getData.filter((item) => item.id === id);if (data.length === 0) {return true;} else {return false;
 
 export default Cart;

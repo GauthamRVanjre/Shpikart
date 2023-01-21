@@ -8,12 +8,16 @@
 
 .product-description img {
   margin-top: 40px;
-  height: 350px;
+  height: 300px;
 }
 
 .product-description-para {
   margin-top: 20px;
   padding: 20px;
+}
+
+.product-features {
+  margin-left: 100px;
 }
 
 .product-features p {
